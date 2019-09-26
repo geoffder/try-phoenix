@@ -2,7 +2,7 @@ defmodule WebsiteWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", WebsiteWeb.RoomChannel
+  channel "room:*", WebsiteWeb.RoomChannel
 
   # Socket params are passed from the client and can
   # be used to verify and authenticate a user. After

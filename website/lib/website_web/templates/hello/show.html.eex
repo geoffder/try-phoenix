@@ -1,0 +1,12 @@
+<div class="phx-hero">
+<!--
+  Paramaters passed to are accesible as module attributes between code
+  tags `<%= %>`. Elixir code between these tags is exectuted, and the result
+  is displayed.
+-->
+<h2>Hi <%= @messenger %>, please stop the downloadin!</h2>
+<body>
+  Here are the squares of 0 to 10: <br>
+  <%= inspect for i <- 0..10, do: i*i %>
+</body>
+</div>

@@ -55,7 +55,31 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("topic:subtopic", {})
+// Updated topic to 'room:lobby' to match the public room from in RoomChannel.
+let channel = socket.channel("room:lobby", {})
+// divs in template chat/index.html.eex
+let chatInput = document.querySelector("#chat-input")
+let messagesContainer = document.querySelector("#messages")
+
+// handling user input
+chatInput.addEventListener("keypress", event => {
+    // when ENTER is pressed
+    if(event.keyCode === 13){
+        channel.push("new_msg", {body: chatInput.value})
+        chatInput.value = ""
+    }
+})
+
+// listen for new messages and append them to our messages container
+channel.on("new_msg", payload => {
+    let messageItem = document.createElement("li")
+    let time = new Date()
+    let hours = time.getHours()
+    let minutes = time.getMinutes()
+    messageItem.innerText = `[${hours}:${minutes}] ${payload.body}`
+    messagesContainer.appendChild(messageItem)
+})
+
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })

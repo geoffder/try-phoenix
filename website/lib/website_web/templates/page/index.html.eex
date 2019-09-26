@@ -1,4 +1,7 @@
 <section class="phx-hero">
+<!-- Here is an added elixir block that displays the value of the :message
+key in the Plug.Conn struct.-->
+  <h1><%= @message %></h1>
   <h1><%= gettext "Welcome to %{name}!", name: "Phoenix" %></h1>
   <p>A productive web framework that<br/>does not compromise speed or maintainability.</p>
 </section>
